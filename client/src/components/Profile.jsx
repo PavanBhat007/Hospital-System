@@ -8,7 +8,7 @@ const Profile = ({ token }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/profile', {
+        const response = await axios.get('http://localhost:5000/patient/profile', {
           headers: { Authorization: token }
         });
         setProfile(response.data);
