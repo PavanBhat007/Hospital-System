@@ -1,22 +1,17 @@
 // backend/models/User.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config');
+const sequelize = require('../sequelize');
 
 const User = sequelize.define('User', {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    address: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    role: {
-        type: DataTypes.ENUM('patient', 'doctor', 'admin'),
-        allowNull: false
-    }
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
 });
 
 module.exports = User;
