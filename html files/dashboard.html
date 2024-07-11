@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hospital Management System</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    .try {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 0%;
+    }
+    body {
+      margin: 5;
+      overflow: scroll; /* Prevent scrollbars */
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .gif {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -1; /* Place it behind the content */
+    }
+    .larger-text {
+      font-size: 20px; /* Change the value to adjust the font size */
+    }
+    nav ul {
+      list-style-type: none;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 20px;
+    }
+
+    header {
+      text-align: center;
+      color: white;
+    }
+
+    #subscribe {
+      position: fixed;
+      bottom: 30px; /* Adjust this value to change the distance from the bottom */
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: black;
+      color: white;
+    }
+    .logo {
+      width: 150px; /* Adjust width as needed */
+      height: 100px; /* Adjust height as needed */
+      margin-right: 1000px;
+      position: relative; /* Set position relative for positioning adjustments */
+      top: 20; /* Adjust top position */
+      left: 20; /* Adjust left position */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><img src="https://dcassetcdn.com/design_img/2488440/598545/598545_13315225_2488440_f322f48d_image.jpg" alt="Medico Center Logo" class="logo"></li>
+        <li><a href="Home">Main</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="program.html">Program</a></li>
+        <li><a href="premium.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    
+    <button id="subscribe">Subscribe</button>
+  </header>
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('subscribe').addEventListener('click', function() {
+      window.location.href = 'premium.html';
+    });
+  </script>
+  <img class="gif" src="https://images.pexels.com/photos/13697925/pexels-photo-13697925.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+  <div class="try">
+    <div class="card" style="width: 14rem;">
+      <img class="card-img-top" src="https://images.pexels.com/photos/4031909/pexels-photo-4031909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+      <div class="card-body">
+        <h5 class="card-title">Symptom Checker</h5>
+        <p class="card-text">Smart Symptom Analysis at Your Fingertips</p>
+        <a href="" class="btn btn-primary">Know more</a>
+      </div>
+    </div>
+  
+    <div class="card" style="width: 14rem;">
+      <img class="card-img-top" src="https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Book Appointments</h5>
+        <p class="card-text">Your Appointment, Just a Click Away.</p>
+        <a href="" class="btn btn-primary">Know more</a>
+      </div>
+    </div>
+  
+    <div class="card" style="width: 14rem;">
+      <img class="card-img-top" src="https://images.pexels.com/photos/21906762/pexels-photo-21906762/free-photo-of-portrait-of-a-man-looking-at-his-watch.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Health Tracking</h5>
+        <p class="card-text">Track Your Health, Transform Your Life</p>
+        <a href="" class="btn btn-primary">Know more</a>
+      </div>
+    </div>
+    <div class="card" style="width: 14rem;">
+      <img class="card-img-top" src="https://images.pexels.com/photos/12193105/pexels-photo-12193105.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Card image cap">
+  
+      <div class="card-body">
+        <h5 class="card-title">Blood Donation Bank</h5>
+        <p class="card-text">Blood Donation will cost you nothing,but it will save a life.</p>
+        <a href="" class="btn btn-primary">Know more</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

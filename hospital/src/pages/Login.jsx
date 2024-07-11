@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 async function loginUser(credentials) {
-  return fetch('http://localhost:5000/login', {
+  return fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -38,8 +38,8 @@ export default function Login({ setToken }) {
   }
 
   return (
-    <div className='login-wrapper'>
-      <h2>Login In to continue ...</h2>
+    <div className='wrapper'>
+      <h2><span className='green-text'>Log-in</span> to continue ... </h2>
       <form onSubmit={handleSubmit}>
         <label>
           <p>Username</p>
@@ -50,10 +50,15 @@ export default function Login({ setToken }) {
           <input type="password" onChange={e => setPassword(e.target.value)} />
         </label>
         <div>
-          <button type="submit">Submit</button>
+          <button className="btn btn-submit" type="submit">Log In</button>
         </div>
       </form>
-      <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+      <p className="info">
+        Don't have an account? 
+        <Link to="/signup">
+          <span className='info-link'>Register here &#8599;</span>
+        </Link>
+      </p>
     </div>
   );
 }

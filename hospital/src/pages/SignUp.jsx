@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 async function signupUser(credentials) {
-  return fetch('http://localhost:5000/signup', {
+  return fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -39,8 +39,8 @@ export default function SignUp({ setToken }) {
   }
 
   return (
-    <div className='signup-wrapper'>
-      <h2>Sign Up</h2>
+    <div className='wrapper'>
+      <h2><span className='green-text'>Register</span> a new account</h2>
       <form onSubmit={handleSubmit}>
         <label>
           <p>Username</p>
@@ -51,9 +51,15 @@ export default function SignUp({ setToken }) {
           <input type="password" onChange={e => setPassword(e.target.value)} />
         </label>
         <div>
-          <button type="submit">Submit</button>
+          <button className='btn btn-submit' type="submit">Register</button>
         </div>
       </form>
+      <p className="info">
+        Already have an account? 
+        <Link to="/login">
+          <span className='info-link'>Log In &#8599;</span>
+        </Link>
+      </p>
     </div>
   );
 }
