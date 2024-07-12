@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-require('dotenv').config()
+require('dotenv').config();
 
 const sequelize = new Sequelize('hospitaldb', process.env.DB_USER, process.env.DB_PWD, {
   host: 'localhost',

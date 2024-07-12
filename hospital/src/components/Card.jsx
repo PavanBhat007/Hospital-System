@@ -8,7 +8,7 @@ export default function Card(props) {
         <div className='card-body'>
             <h5 className="card-title">{props.title}</h5>
             <p className="card-text">{props.subtitle}</p>
-            <a href="/">Know more &#8599;</a>
+            <a href={props.href}>Know more &#8599;</a>
         </div>
     </div>
   )

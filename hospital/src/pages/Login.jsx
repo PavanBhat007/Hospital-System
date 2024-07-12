@@ -14,23 +14,28 @@ async function loginUser(credentials) {
 }
 
 export default function Login({ setToken }) {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
     let response = await loginUser({
-      username,
+      email,
       password
     });
 
     const token = response?.token
     const message = response?.message;
+    const data = response?.user_data;
 
     console.log(response);
     if (token === 'LOGIN-SUCCESS') {
-      setToken({ "username": username, "status": "authenticated" });
+      setToken({ 
+        "user_id": data.id, 
+        "username": data.username, 
+        "role": data.role
+      });
       navigate('/');
     } else {
       alert(message);
@@ -42,8 +47,8 @@ export default function Login({ setToken }) {
       <h2><span className='green-text'>Log-in</span> to continue ... </h2>
       <form onSubmit={handleSubmit}>
         <label>
-          <p>Username</p>
-          <input type="text" onChange={e => setUsername(e.target.value)} />
+          <p>Email</p>
+          <input type="email" onChange={e => setEmail(e.target.value)} />
         </label>
         <label>
           <p>Password</p>

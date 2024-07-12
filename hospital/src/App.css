@@ -4,6 +4,13 @@
   text-shadow: 2px 2px 1px rgb(0, 36, 0);
 }
 
+.green-text-header {
+  color: rgb(60, 255, 118);
+  font-size: 5rem;
+  text-shadow: 2px 2px 1px rgb(0, 36, 0);
+  text-transform: capitalize;
+}
+
 header nav {
   margin: 0;
   padding: 0;
@@ -76,7 +83,22 @@ header h2.brand {
   text-decoration: none;
 }
 
-.btn-logout,
+.btn-icon {
+  background-color: rgb(60, 255, 118);
+  transition: transform 0.2s ease;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.btn-icon img {
+  width: 20px;
+  height: auto;
+  margin-left: 10px;
+}
+
 .btn-login,
 .btn-signup,
 .btn-submit {
@@ -91,7 +113,7 @@ header h2.brand {
   color: rgb(60, 255, 118);
 }
 
-.btn-logout:hover,
+.btn-icon:hover,
 .btn-login:hover,
 .btn-signup:hover,
 .btn-submit:hover {
@@ -184,12 +206,23 @@ header h2.brand {
   border-radius: 5%;
 }
 
-.wrapper label {
+.wrapper label,
+.flex-wrapper {
   font-size: 1.3rem;
   font-weight: bold;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  padding: 0 2vw;
+}
+
+.wrapper label p {
+  text-align-last: left;
+}
+
+.wrapper label > *:first-child,
+.wrapper label > *:last-child {
+  width: 50%;
 }
 
 .wrapper label input {
@@ -202,6 +235,20 @@ header h2.brand {
 
 .wrapper label input:focus {
   border: 5px solid rgb(99, 222, 99);
+}
+
+.wrapper .flex-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.wrapper .flex-container .radio-input {
+  display: flex;
+}
+
+.wrapper .flex-container .radio-input label {
+  font-size: 1.1rem;
 }
 
 .info {
@@ -284,4 +331,209 @@ header h2.brand {
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 5vh;
+}
+
+.profile {
+  width: 60%;
+  margin: 3vh auto;
+}
+
+.profile-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(22, 222, 22, 0.2);
+  padding: 1vh 0;
+  border-radius: 10px;
+}
+
+.profile-card .profile-details,
+.profile-card .appointments {
+  width: 50%;
+}
+
+.profile-card .profile-details {
+  border-right: 3px solid rgb(0, 36, 0);
+  margin: 0 1vw;
+}
+
+.profile-card .profile-details .flex-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(0, 36, 0);
+  margin-right: 1vw;
+}
+
+.profile-card .profile-details .flex-wrapper:last-child {
+  border: none;
+}
+
+.profile-card .profile-details .flex-wrapper p:first-child {
+  font-size: 1.5rem;
+  color: rgb(0, 36, 0);
+}
+
+.profile-card .appointments h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  background-color: rgba(0, 36, 0, 0.7);
+  border-radius: 5px;
+  margin: 0 1vw;
+  text-align: center;
+  color: rgb(60, 255, 118);
+  text-shadow: 2px 2px 0 black;
+}
+
+.profile-card .appointments ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.profile-card .appointments ul li {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  background-color: rgb(99, 222, 99);
+  margin-right: 10px;
+  border-radius: 10px;
+  padding: 0 10px;
+  margin-bottom: 1vh;
+}
+
+.profile-card .appointments ul li > *:first-child {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.profile-card .appointments ul li .name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.profile-card .appointments ul li .appointment-date p:first-child {
+  color: rgb(0, 36, 0);
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.profile-card .appointments ul li .appointment-date p:last-child {
+  font-weight: bold;
+  margin: 0;
+  color: rgb(55, 98, 68);
+}
+
+.appointment-wrapper {
+  width: 40%;
+  margin: 5vh auto;
+  padding: 0 2vw;
+}
+
+.appointment-wrapper h2 {
+  font-size: 2rem;
+}
+
+.appointment-wrapper form {
+  background-color: rgba(22, 222, 22, 0.2);
+  padding: 1vh 2vw;
+  border-radius: 10px;
+}
+
+.appointment-wrapper form .btn{
+  margin: 1vh 0;
+}
+
+.appointment-wrapper form label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+
+.appointment-wrapper form label p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: rgb(0, 36, 0);
+}
+
+.appointment-wrapper form label select {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  outline: none;
+  text-transform: capitalize;
+  max-width: 20vw;
+}
+
+.appointment-wrapper form label select option {
+  text-transform: capitalize;
+}
+
+.appointment-wrapper form label input[type="datetime-local"] {
+  padding: 5px 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  outline: none;
+  max-width: 20vw;
+}
+
+.service-wrapper {
+  margin: 1vh 1vw;
+}
+
+.service-wrapper .page-header {
+  text-align: center;
+}
+
+.service {
+  margin: 1vh 2vw;
+  padding: 1vh 1vw;
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+}
+
+.service .service-name {
+  flex: 1;
+  font-size: 1.5rem;
+  width: 20%;
+  border-right: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.service .service-name p {
+  margin: 5px 0;
+}
+
+.service .service-name img {
+  width: 10%;
+  height: auto;
+  margin: 0;
+}
+
+.service .service-desc {
+  width: 80%;
+  padding: 0 2vw;
+  margin: 0;
+  height: min-content;
+}
+
+.service .service-link > * {
+  text-decoration: none;
+  font-size: 3rem;
+  color: rgb(36, 36, 36);
+  flex: 1;
+}
+
+.service .service-link > *:hover {
+  text-decoration: underline;
 }
