@@ -34,6 +34,7 @@ export default function Navbar({ isLoggedIn, logout, username }) {
               </>
             ) : (
               <>
+                <li className="btn btn-signup"><Link to="/know-your-med">Know Your Med</Link></li>
                 <li className="btn btn-login"><Link to="/login">Login</Link></li>
                 <li className="btn btn-signup"><Link to="/signup">Sign Up</Link></li>
               </>

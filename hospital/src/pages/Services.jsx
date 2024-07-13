@@ -17,14 +17,14 @@ export default function Services({ user_id }) {
         img_path="./imgs/pill.png"
         title="Medicine Checker"
         subtitle="Check the availability and details of your prescribed medicines. Click the arrow to use the medicine checker now." 
-        link="/"
+        link="/know-your-med"
         bgc="rgba(152, 251, 152, 0.7)"
       />
       <ServiceCard 
         img_path="./imgs/bell.png"
         title="Personal Reminder"
         subtitle="Set personal health reminders for medication, appointments, and more. Click the arrow to set a reminder now." 
-        link="/"
+        link="/calendar"
         bgc="rgba(143, 188, 143, 0.7)"
       />
       <ServiceCard 

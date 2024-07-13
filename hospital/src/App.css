@@ -444,7 +444,7 @@ header h2.brand {
   border-radius: 10px;
 }
 
-.appointment-wrapper form .btn{
+.appointment-wrapper form .btn {
   margin: 1vh 0;
 }
 
@@ -536,4 +536,43 @@ header h2.brand {
 
 .service .service-link > *:hover {
   text-decoration: underline;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #161b25;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(24, 230, 212);
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,38 +1,47 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../sequelize');
+import { DataTypes } from "sequelize";
+import sequelize from "../config/database";
 
-const User = sequelize.define('User', {
+const User = sequelize.define("User", {
   username: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   dob: {
     type: DataTypes.DATEONLY,
-    allowNull: false
+    allowNull: false,
   },
   gender: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   role: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: 'user'
+    defaultValue: "user",
   },
-  specialty: {
+  bloodType: {
     type: DataTypes.STRING,
-    allowNull: true
-  }
+    allowNull: true,
+  },
+  organDonor: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
+  organs: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
-module.exports = User;
+export default User;

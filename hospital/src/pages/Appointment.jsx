@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import Calendar from "../components/Calendar";
+
 async function fetchDoctors() {
   const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/doctors`);
   const data = await response.json();
@@ -44,28 +46,31 @@ export default function Appointment({ user_id }) {
   }
 
   return (
-    <div className='appointment-wrapper'>
-      <h2>Book an <span className='green-text-header'>Appointment</span></h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <p>Select Doctor</p>
-          <select onChange={e => setSelectedDoctor(e.target.value)} value={selectedDoctor}>
-            <option value="" disabled>Select Doctor</option>
-            {doctors.map(doctor => (
-              <option key={doctor.id} value={doctor.id}>
-                {doctor.username} -- {doctor.specialty}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          <p>Appointment Date</p>
-          <input type="datetime-local" onChange={e => setAppointmentDate(e.target.value)} />
-        </label>
-        <div>
-          <button className='btn btn-submit' type="submit">Book Appointment</button>
-        </div>
-      </form>
+    <div>
+      <Calendar />
+      <div className='appointment-wrapper'>
+        <h2>Book an <span className='green-text-header'>Appointment</span></h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            <p>Select Doctor</p>
+            <select onChange={e => setSelectedDoctor(e.target.value)} value={selectedDoctor}>
+              <option value="" disabled>Select Doctor</option>
+              {doctors.map(doctor => (
+                <option key={doctor.id} value={doctor.id}>
+                  {doctor.username} -- {doctor.specialty}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <p>Appointment Date</p>
+            <input type="datetime-local" onChange={e => setAppointmentDate(e.target.value)} />
+          </label>
+          <div>
+            <button className='btn btn-submit' type="submit">Book Appointment</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

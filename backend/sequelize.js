@@ -1,5 +1,7 @@
-const { Sequelize } = require('sequelize');
-require('dotenv').config();
+import { Sequelize } from'sequelize';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const sequelize = new Sequelize('hospitaldb', process.env.DB_USER, process.env.DB_PWD, {
   host: 'localhost',
@@ -8,4 +10,4 @@ const sequelize = new Sequelize('hospitaldb', process.env.DB_USER, process.env.D
   logging: false
 });
 
-module.exports = sequelize;
+export default sequelize;

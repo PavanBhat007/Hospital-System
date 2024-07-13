@@ -1,19 +1,19 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../sequelize');
+import { DataTypes } from "sequelize";
+import sequelize from "../sequelize.js";
 
-const Appointment = sequelize.define('Appointment', {
+const Appointment = sequelize.define("Appointment", {
   patient_name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   doctor_name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   appointment_date: {
     type: DataTypes.DATE,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 });
 
-module.exports = Appointment;
+export default Appointment;

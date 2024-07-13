@@ -1,15 +1,16 @@
-// backend/index.js
-const express = require("express");
-const cors = require("cors");
-const bcrypt = require("bcrypt");
-const sequelize = require("./sequelize");
+import express from "express";
+import cors from "cors";
+import bcrypt from "bcrypt";
+import sequelize from "./sequelize.js";
+import dotenv from "dotenv";
 
-require("dotenv").config();
+import User from "./models/User.js";
+import Appointment from "./models/Appointment.js";
 
-const User = require("./models/User");
-const Appointment = require("./models/Appointment");
+dotenv.config();
 
 const PORT = process.env.BACKEND_PORT || 5000;
+const FLASK_URL = process.env.FLASK_URL;
 
 const app = express();
 
@@ -60,7 +61,7 @@ app.post("/signup", async (req, res) => {
       dob,
       gender,
       role,
-      specialty
+      specialty,
     });
 
     res.send({
@@ -97,9 +98,13 @@ app.post("/appointment", async (req, res) => {
   console.log("POST -> /appointment");
   const { user_id, doctor_id, appointment_date } = req.body;
 
-  const patient_name = await User.findOne({ where: {id: user_id} }).then((data) => data.username);
-  const doctor_name = await User.findOne({ where: {id: doctor_id} }).then((data) => data.username);
-  
+  const patient_name = await User.findOne({ where: { id: user_id } }).then(
+    (data) => data.username
+  );
+  const doctor_name = await User.findOne({ where: { id: doctor_id } }).then(
+    (data) => data.username
+  );
+
   try {
     const appointment = await Appointment.create({
       patient_name,
@@ -117,14 +122,21 @@ app.get("/appointments", async (req, res) => {
   console.log("GET -> /appointments");
   const { user_id, role } = req.query;
 
-  const username = await User.findOne({ where: { id: user_id } }).then((data) => data.username);
+  const username = await User.findOne({ where: { id: user_id } }).then(
+    (data) => data.username
+  );
   let appointments = null;
 
   try {
-    if(role === "user") 
-      appointments = await Appointment.findAll({ where: { patient_name: username } });
-    else appointments = await Appointment.findAll({ where: { doctor_name: username } });
-    
+    if (role === "user")
+      appointments = await Appointment.findAll({
+        where: { patient_name: username },
+      });
+    else
+      appointments = await Appointment.findAll({
+        where: { doctor_name: username },
+      });
+
     res.send(appointments);
   } catch (error) {
     console.error("Error fetching appointments:", error);
@@ -143,5 +155,29 @@ app.get("/doctors", async (req, res) => {
     res.status(500).send({ message: "Internal error" });
   }
 });
+
+app.get("/know-your-med", async (req, res) => {
+  const med_name = req.query["med"];
+
+  console.log(`GET -> /know-your-med | query [${med_name}]`);
+  console.log(`Fetching data from: ${FLASK_URL}/med`);
+
+  try {
+    const med_data = await fetch(`${FLASK_URL}/med`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(med_name),
+    }).then((data) => data.json());
+
+    console.log(med_data);
+    res.json(med_data);
+  } catch {
+    console.log("FAIL");
+    res.json({"messaage": "FAIL"});
+  }
+});
+
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT} ...`));

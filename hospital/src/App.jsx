@@ -10,9 +10,13 @@ import Dashboard from "./pages/Dashboard";
 import Services from "./pages/Services";
 import NotFound from "./pages/NotFound";
 import About from './pages/About';
-import Navbar from './components/Navbar';
 import Profile from './pages/Profile';
 import Appointment from './pages/Appointment';
+import KnowYourMed from './pages/KnowYourMed';
+import Pharmacy from './pages/Pharmacy';
+
+import Navbar from './components/Navbar';
+import Calendar from './components/Calendar';
 
 import './App.css';
 
@@ -45,11 +49,13 @@ export default function App() {
                       : <Navigate to="/profile" />
                     } 
                   />
-        }
+                }
+        {token && <Route path="/calendar" element={<Calendar />} />}
         
         <Route path="/" element={token ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/signup" element={<SignUp setToken={setToken} />} />
+        <Route path="/know-your-med" element={<KnowYourMed />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
