@@ -25,18 +25,21 @@ function KnowYourMed() {
     };
 
     return (
-        <div>
+        <div className='wrapper kym'>
+            <h2 class="green-text-header">Know Your Med</h2>
             <form onSubmit={handleSubmit}>
-                <input type="text" name="medInput" placeholder="Enter medicine name" />
-                <button type="submit">Search</button>
+                <label> 
+                    <input type="text" name="medInput" placeholder="Enter medicine name" />
+                    <button className='btn btn-submit' type="submit">Search</button>
+                </label>
             </form>
             {medData ? (
-                <div>
+                <div class="med-details">
                     <h2>{medData.Name}</h2>
-                    <p>Description: {medData.Description}</p>
-                    <p>Usage: {medData.Usage ? medData.Usage : "No data available. Check the description."}</p>
-                    <p>Side Effects: {medData.SideEffects ? medData.SideEffects : "No data available. Check the description."}</p>
-                    <p>Alternatives: {medData.Alternatives}</p>
+                    <p><strong>Description</strong>: {medData.Description}</p>
+                    <p><strong>Usage</strong>: {medData.Usage ? medData.Usage : "No data available. Check the description."}</p>
+                    <p><strong>Side Effects</strong>: {medData.SideEffects ? medData.SideEffects : "No data available. Check the description."}</p>
+                    <p><strong>Alternatives</strong>: {medData.Alternatives}</p>
                 </div>
             ) : (
                 <p>Loading...</p>

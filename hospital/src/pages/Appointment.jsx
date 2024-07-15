@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Calendar from "../components/Calendar";
+import GMeet from '../components/GMeet';
 
 async function fetchDoctors() {
   const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/doctors`);
@@ -47,7 +48,6 @@ export default function Appointment({ user_id }) {
 
   return (
     <div>
-      <Calendar />
       <div className='appointment-wrapper'>
         <h2>Book an <span className='green-text-header'>Appointment</span></h2>
         <form onSubmit={handleSubmit}>

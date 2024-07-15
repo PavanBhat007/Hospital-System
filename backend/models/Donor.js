@@ -1,7 +1,11 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../sequelize";
+import sequelize from "../sequelize.js";
 
 const Donor = sequelize.define("Donor", {
+  user_id:{
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
   bloodType: {
     type: DataTypes.STRING,
     allowNull: true,

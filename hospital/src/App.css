@@ -576,3 +576,127 @@ header h2.brand {
     transform: rotate(360deg);
   }
 }
+
+.med-details {
+  background-color: rgba(0, 36, 0, 0.2);
+  padding: 1vh 3vw;
+  margin: 1vh 2vw;
+  border-radius: 10px;
+  border: 2px solid rgb(0, 36, 0);
+  max-width: 85%;
+  margin-inline: auto;
+}
+
+.wrapper.kym,
+.wrapper.calendar {
+  width: 80%;
+  text-align: justify;
+  border-radius: 10px;
+}
+
+.wrapper.kym .green-text-header,
+.wrapper.donate .green-text-header,
+.wrapper.calendar .green-text {
+  margin: 2vh 2vw;
+}
+
+.wrapper.kym .med-details {
+  font-size: 1.2rem;
+}
+
+.wrapper.donate,
+.wrapper.calendar,
+.wrapper.ai,
+.wrapper.prescription {
+  width: 60%;
+}
+
+.wrapper.calendar h2 {
+  margin: 1vh 2vw;
+}
+
+.wrapper.calendar .green-text {
+  margin: 0;
+}
+
+.wrapper.ai {
+  text-align: justify;
+  padding: 1vh 2vw;
+  border-radius: 10px;
+}
+
+.wrapper.donate .btn {
+  margin-top: 1vh;
+}
+
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-checkbox {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(55, 98, 68);
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+}
+
+.custom-checkbox::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 50px;
+  height: 10px;
+  background-color: rgb(60, 255, 118);
+  border-radius: 2px;
+  transition: opacity 0.2s;
+  opacity: 0;
+}
+
+input[type="checkbox"]:checked + .custom-checkbox::after {
+  opacity: 1;
+}
+
+.donor-search ul {
+  list-style-type: none;
+}
+
+.donor-search ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2vw;
+}
+
+.donor-search ul li p {
+  border-right: 2px solid rgb(0, 36, 0);
+  text-align: center;
+  padding: 0 2vw;
+  font-size: 1.2rem;
+}
+
+.donor-search ul li p:last-child {
+  border: none;
+}
+
+.wrapper.calendar label {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.wrapper.ai .answer {
+  padding: 1vh 2vw;
+  border: 2px solid rgb(0, 36, 0);
+  border-radius: 10px;
+  margin: 1vh 1vw;
+}
+
+.wrapper.prescription img {
+  border: 2px solid rgb(0, 36, 0);
+  border-radius: 10px;
+}

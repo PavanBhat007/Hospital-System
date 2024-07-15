@@ -1,0 +1,35 @@
+# Virtual environment
+/env
+
+# Compiled Python files
+*.pyc
+
+# Python cache
+__pycache__/
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# Backup files
+*~
+
+#DS
+.DS_store
+
+# database
+instance/
+instance/your_database.db
+
+# node modules
+node_modules/
+
+
+package-lock.json
+package.json

@@ -2,14 +2,17 @@ import express from "express";
 import cors from "cors";
 import bcrypt from "bcrypt";
 import sequelize from "./sequelize.js";
+import { Op } from 'sequelize';
 import dotenv from "dotenv";
+import multer from "multer";
 
 import User from "./models/User.js";
 import Appointment from "./models/Appointment.js";
+import Donor from "./models/Donor.js";
 
 dotenv.config();
 
-const PORT = process.env.BACKEND_PORT || 5000;
+const PORT = process.env.BACKEND_PORT || 4000;
 const FLASK_URL = process.env.FLASK_URL;
 
 const app = express();
@@ -20,6 +23,16 @@ app.use(express.json());
 sequelize.sync().then(() => {
   console.log("Database & tables created!");
 });
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // Directory where files will be saved
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`); // File name
+  }
+});
+const upload = multer({ storage });
 
 app.post("/login", async (req, res) => {
   console.log("POST -> /login");
@@ -171,11 +184,113 @@ app.get("/know-your-med", async (req, res) => {
       body: JSON.stringify(med_name),
     }).then((data) => data.json());
 
-    console.log(med_data);
     res.json(med_data);
   } catch {
-    console.log("FAIL");
-    res.json({"messaage": "FAIL"});
+    res.json({ messaage: "FAIL" });
+  }
+});
+
+app.get("/donors", async (req, res) => {
+  console.log("GET -> /donors");
+
+  try {
+    const donors = await Donor.findAll();
+    const donorWithUserDetails = await Promise.all(
+      donors.map(async (donor) => {
+        const user = await User.findOne({ where: { id: donor.user_id } });
+        donor.dataValues.username = user.username;
+        donor.dataValues.email = user.email;
+        return donor;
+      })
+    );
+
+    console.log(donorWithUserDetails);
+    res.send(donorWithUserDetails);
+  } catch (error) {
+    console.error("Error fetching donors:", error);
+    res.status(500).send({ message: "Failed to fetch donors" });
+  }
+});
+
+app.get("/filter-by-organs", async (req, res) => {
+  const organs = req.query["organs"];
+  try {
+    const donors = await Donor.findAll({
+      where: {
+        organs: {
+          [Op.like]: `%${organs}%`,
+        },
+      },
+    });
+    res.send(donors);
+  } catch (error) {
+    console.error("Error searching donors:", error);
+    res.status(500).send({ message: "Failed to search donors" });
+  }
+});
+
+app.post("/new-donor", async (req, res) => {
+  const { user_id, bloodType, organDonation, organs } = req.body;
+  console.log(req.body);
+  try {
+    const newDonor = await Donor.create({
+      user_id,
+      bloodType,
+      organDonation,
+      organs,
+    });
+    res.status(201).send(newDonor);
+  } catch (error) {
+    console.error("Error creating donor:", error);
+    res.status(500).send({ message: "Failed to create donor" });
+  }
+});
+
+app.post("/update-donor", async (req, res) => {
+  const { id, bloodType, organDonation, organs } = req.body;
+  try {
+    const donor = await Donor.findOne({ where: { user_id: id } });
+    if (!donor) {
+      return res.status(404).json({ message: "Donor not found" });
+    }
+    donor.bloodType = bloodType;
+    donor.organDonation = organDonation;
+    donor.organs = organs;
+    await donor.save();
+    res.send(donor);
+  } catch (error) {
+    console.error("Error updating donor:", error);
+    res.status(500).send({ message: "Failed to update donor" });
+  }
+});
+
+app.post("/query", async (req, res) => {
+  const { query } = req.body;
+  console.log("POST -> /ask-ai " + query);
+  const response = await fetch(`http://192.168.43.122:5000/query`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query: query }),
+  }).then((data) => data.json());
+  console.log(response);
+  res.send(response);
+});
+
+app.get("/prescription", upload.single("file"), async (req, res) => {
+  console.log("GET -> /prescription");
+  
+  try {
+    console.log("Fetching...")
+    const response = await fetch("http://192.168.43.122:5000/ocr", {
+      method: "GET",
+    });
+    console.log("Done")
+    res.send(response);
+  } catch (error) {
+    console.error("Error processing image:", error);
+    res.status(500).send({ message: "Internal error" });
   }
 });
 

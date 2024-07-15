@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react';
 import DatePicker from 'react-datepicker';
 
+
 function Calendar() {
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
@@ -40,11 +41,11 @@ function Calendar() {
       'summary': eventName,
       'description': eventDescription,
       'start': {
-        'dateTime': start.toISOString(),
+        'dateTime': start,
         'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
       },
       'end': {
-        'dateTime': end.toISOString(),
+        'dateTime': end,
         'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
       },
       'attendees': [
@@ -66,40 +67,38 @@ function Calendar() {
     });
   }
 
+  console.log(start, end);
+
   return (
-    <div className="App">
-      <div style={{ width: "400px", margin: "30px auto" }}>
+    <div className="wrapper calendar">
+      <h2 className='page-header'>Personal Medicine <span className='green-text-header'>Reminder</span></h2>
+      <div>
         {session ?
           <>
-            <h2>Hey there {session.user.email}</h2>
-            <p>Start of your event</p>
-            <DatePicker
-              selected={start}
-              onChange={(date) => setStart(date)}
-              showTimeSelect
-              dateFormat="Pp"
-            />
-            <p>End of your event</p>
-            <DatePicker
-              selected={end}
-              onChange={(date) => setEnd(date)}
-              showTimeSelect
-              dateFormat="Pp"
-            />
-            <p>Event name</p>
-            <input type="text" onChange={(e) => setEventName(e.target.value)} />
-            <p>Event description</p>
-            <input type="text" onChange={(e) => setEventDescription(e.target.value)} />
-            <p>Doctor's Email</p>
-            <input type="email" onChange={(e) => setDoctorEmail(e.target.value)} />
+            <h2>Hey! <span className='green-text'>{session.user.email}</span></h2>
+            <label>When do you have to take your medicine (start)
+              <input type="datetime-local" onChange={(e) => setStart(e.target.value)} />
+            </label>
+            <label>When do you have to take your medicine (end)
+              <input type="datetime-local" onChange={(e) => setEnd(e.target.value)} />
+            </label>
+            <label>Medicine Names
+              <input type="text" onChange={(e) => setEventName(e.target.value)} />
+            </label>
+            <label>Descriptions (instructions)
+              <input type="text" onChange={(e) => setEventDescription(e.target.value)} />
+            </label>
+            <label>Your email
+              <input type="email" onChange={(e) => setDoctorEmail(e.target.value)} />
+            </label>
             <hr />
-            <button onClick={() => createCalendarEvent()}>Create Calendar Event</button>
+            <button className='btn btn-submit' onClick={() => createCalendarEvent()}>Create A Reminder</button>
             <p></p>
-            <button onClick={() => signOut()}>Sign Out</button>
+            <button className='btn btn-submit' onClick={() => signOut()}>Sign Out</button>
           </>
           :
           <>
-            <button onClick={() => googleSignIn()}>Sign In With Google</button>
+            <button className='btn btn-submit' onClick={() => googleSignIn()}>Sign In With Google</button>
           </>
         }
       </div>

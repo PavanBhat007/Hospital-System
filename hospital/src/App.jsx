@@ -14,11 +14,19 @@ import Profile from './pages/Profile';
 import Appointment from './pages/Appointment';
 import KnowYourMed from './pages/KnowYourMed';
 import Pharmacy from './pages/Pharmacy';
+import Donation from './pages/Donation';
 
 import Navbar from './components/Navbar';
 import Calendar from './components/Calendar';
 
+import { createClient } from '@supabase/supabase-js'
+import  { SessionContextProvider } from '@supabase/auth-helpers-react'
+
 import './App.css';
+import AskAI from './components/AskAI';
+import Prescription from './pages/Prescription';
+
+const supabase = createClient("https://zgghpphzjtlxthoudljn.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnZ2hwcGh6anRseHRob3VkbGpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjA4NTEzODAsImV4cCI6MjAzNjQyNzM4MH0.7kIkJ2URLi6L5mAjQ7Wa-r3ELTsK2XIKFnuRSBEu-KA");
 
 function logout() {
   sessionStorage.clear();
@@ -30,7 +38,7 @@ export default function App() {
   const { token, setToken } = useToken();
   
   return (
-    <>
+    <SessionContextProvider supabaseClient={supabase}>
       <Navbar 
         isLoggedIn={token ? true : false } 
         logout={logout} 
@@ -50,14 +58,18 @@ export default function App() {
                     } 
                   />
                 }
-        {token && <Route path="/calendar" element={<Calendar />} />}
+        {token && <Route path="/donation" element={<Donation user_id={token.user_id} />} />}
+        {token && <Route path="/pharmacy" element={<Pharmacy />} />}
+        {token && <Route path="/prescription" element={<Prescription />} />}
         
+        <Route path="/calendar" element={<Calendar />} />
         <Route path="/" element={token ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/signup" element={<SignUp setToken={setToken} />} />
         <Route path="/know-your-med" element={<KnowYourMed />} />
+        <Route path="/ask-ai" element={<AskAI />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </SessionContextProvider>
   );
 }

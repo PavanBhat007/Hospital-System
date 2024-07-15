@@ -9,5 +9,4 @@ const sequelize = new Sequelize('hospitaldb', process.env.DB_USER, process.env.D
   dialect: 'mysql',
   logging: false
 });
-
 export default sequelize;

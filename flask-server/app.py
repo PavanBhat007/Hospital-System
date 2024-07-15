@@ -8,6 +8,29 @@ from parser import get_med_data, med_list
 app = Flask(__name__)
 df = pd.read_csv("./Dataset.csv")
 nlp = spacy.load("en_core_web_sm")
+    
+
+def extract_usage_and_side_effects(text):
+    doc = nlp(text)
+    usage = None
+    side_effects = None
+
+    for sent in doc.sents:
+        sent_text = sent.text.strip()
+        if any(keyword in sent_text.lower() for keyword in ['usage', 'directions for use:', 'taken', 'regularly', 'schedule', 'dose']):
+            usage = sent_text
+
+        if any(keyword in sent_text.lower() for keyword in ['side effects', 'common side effects include']):
+            side_effects = sent_text
+
+        if usage and side_effects:
+            break
+        
+    
+    return {
+        "usage": usage,
+        "side_effects": side_effects
+    }
 
 
 @app.route('/med', methods=['POST'])
@@ -30,28 +53,6 @@ def med_data():
     else:
         return jsonify({"error": "No matching medicine found"}), 404
     
-
-def extract_usage_and_side_effects(text):
-    doc = nlp(text)
-    usage = None
-    side_effects = None
-
-    for sent in doc.sents:
-        sent_text = sent.text.strip()
-        if any(keyword in sent_text.lower() for keyword in ['usage:', 'directions for use:', 'taken', 'regularly', 'schedule', 'dose']):
-            usage = sent_text
-
-        if any(keyword in sent_text.lower() for keyword in ['side effects:', 'common side effects include']):
-            side_effects = sent_text
-
-        if usage and side_effects:
-            break
-        
-    
-    return {
-        "usage": usage,
-        "side_effects": side_effects
-    }
 
 
 

@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/database";
+import sequelize from "../sequelize.js";
 
 const User = sequelize.define("User", {
   username: {
@@ -32,6 +32,7 @@ const User = sequelize.define("User", {
   bloodType: {
     type: DataTypes.STRING,
     allowNull: true,
+    defaultValue: ""
   },
   organDonor: {
     type: DataTypes.BOOLEAN,
@@ -41,6 +42,7 @@ const User = sequelize.define("User", {
   organs: {
     type: DataTypes.STRING,
     allowNull: true,
+    defaultValue: ""
   },
 });
 

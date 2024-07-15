@@ -31,14 +31,21 @@ export default function Services({ user_id }) {
         img_path="./imgs/prescription.png"
         title="Prescription Storage"
         subtitle="Store and manage your prescriptions securely in one place. Click the arrow to access your prescriptions now." 
-        link="/"
+        link="/prescription"
         bgc="rgba(119, 221, 119, 0.7)"
       />
       <ServiceCard 
         img_path="./imgs/chat-gpt.png"
         title="Ask GPT"
         subtitle="Get health advice and answers to your medical questions from our AI. Click the arrow to talk with AI now." 
-        link="/"
+        link="/ask-ai"
+        bgc="rgba(144, 238, 144, 0.7)"
+      />
+      <ServiceCard 
+        img_path="./imgs/chat-gpt.png"
+        title="Organ and Blood Donation"
+        subtitle="Make a pledge to donate organs or blood. Click the arrow to pledge now." 
+        link="/donation"
         bgc="rgba(144, 238, 144, 0.7)"
       />
     </div>

@@ -1,0 +1,52 @@
+{% extends 'fresh.html' %} {% block title %}Token{% endblock %} {%
+block content %}
+<section class="print-bill">
+  <div class="bill-slip">
+    <h2>DSU FOOD COURT</h2>
+    <h3>DAYANANDA SAGAR UNIVERSITY</h3>
+    <p><small>Kudlu Gate, Hosur Main Road, Bangalore - 560068</small></p>
+    <hr/>
+    <div class="billing-details">
+      <p>Bill No: {{ bill_id }}</p>
+      <p>Date: {{ bill_date }}</p>
+      <p>Time: {{ bill_time }}</p>
+    </div>
+    <hr/>
+    <table>
+      <tr class="bill-item-details-header">
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Pr</th>
+        <th>Amount</th>
+      </tr>
+
+      {% for item in items %}
+      <tr class="bill-item-details">
+        <td>{{ item.item_name|capitalize }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.price/item.quantity }}</td>
+        <td>{{ item.price }}</td>
+      </tr>
+      {% endfor %}
+      <tr class="totalling">
+        <th>TOTAL</th>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>{{ total }}</td>
+      </tr>
+    </table>
+    <div class="thank-you">
+      <p>THANK YOU!</p>
+      <p>Please visit again!</p>
+    </div>
+  </div>
+</section>
+<script>
+  function redirectAfterPrint() {
+    window.location.href = "/";
+  }
+
+  window.addEventListener("afterprint", redirectAfterPrint);
+  window.print();
+</script>
+{% endblock %}

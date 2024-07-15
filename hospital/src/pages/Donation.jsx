@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import DonorSearch from '../components/DonorSearch';
 
 const Donation = ({ user_id }) => {
   const [bloodType, setBloodType] = useState('');
@@ -9,7 +10,7 @@ const Donation = ({ user_id }) => {
   const handleDonationSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/donors`, {
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/new-donor`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -18,6 +19,7 @@ const Donation = ({ user_id }) => {
       });
       if (response.ok) {
         alert('Donation form submitted successfully');
+        console.log(response.json());
       } else {
         alert('Failed to submit donation form');
         window.location.reload();
@@ -29,24 +31,27 @@ const Donation = ({ user_id }) => {
   };
 
   return (
-    <div>
-      <h2>Organ and Blood Donation</h2>
+    <div className='wrapper donate'>
+      <h2 className='green-text-header'>Organ and Blood Donation</h2>
       <form onSubmit={handleDonationSubmit}>
-        <label>Blood Type:</label>
-        <input type="text" value={bloodType} onChange={(e) => setBloodType(e.target.value)} />
-
-        <label>Organ Donor:</label>
-        <input type="checkbox" checked={organDonation} onChange={(e) => setOrganDonation(e.target.checked)} />
-
+        <label>Blood Type:
+          <input type="text" value={bloodType} onChange={(e) => setBloodType(e.target.value)} />
+        </label>
+        <label>Organ Donor (click on the green box):
+          <input type="checkbox" id="chkbox" checked={organDonation} onChange={(e) => setOrganDonation(e.target.checked)} />
+          <span class="custom-checkbox"></span>
+        </label>
         {organDonation && (
           <>
-            <label>Organs to Donate:</label>
-            <input type="text" value={organs} onChange={(e) => setOrgans(e.target.value)} />
+            <label>Organs to Donate:
+              <input type="text" value={organs} onChange={(e) => setOrgans(e.target.value)} />
+            </label>
           </>
         )}
 
-        <button type="submit">Submit Donation Form</button>
+        <button className='btn btn-submit' type="submit">Pledge Donation</button>
       </form>
+      <DonorSearch user_id={user_id} />
     </div>
   );
 };
